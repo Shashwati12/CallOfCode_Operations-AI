@@ -40,6 +40,7 @@ interface AuthResponse {
     refreshToken: string;
 }
 
+
 export class AuthService {
     /**
      * Hash password using bcrypt
@@ -464,25 +465,23 @@ export class AuthService {
      */
     async getUserById(userId: string): Promise<AuthenticatedUser | null> {
         console.log("Fetching user:", userId);
+        const user = await prisma.user.findUnique({
+           where: { id: userId },
+           select: {
+             id: true,
+             name: true,
+             email: true,
+             phone: true,
+             role: true,
+           },
+         });
+        
+         if(!user) return null;
+         return{
+            ...user,
+            role: user.role as UserRole,
+         };
 
-        // TODO: Integrate with Prisma
-        // const user = await prisma.user.findUnique({
-        //   where: { id: userId },
-        //   select: {
-        //     id: true,
-        //     name: true,
-        //     phone: true,
-        //     role: true,
-        //   },
-        // });
-        //
-        // return user;
-
-        // Keep methods in scope for future use
-        void this.comparePassword;
-        void this.hashPassword;
-
-        return null;
     }
 }
 
