@@ -146,10 +146,7 @@ export default function WorkerDashboard() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {/* View Tasks Button */}
                                     <button 
-                                        onClick={() => {
-                                            const tasksSection = document.getElementById('tasks-section');
-                                            tasksSection?.scrollIntoView({ behavior: 'smooth' });
-                                        }}
+                                        onClick={() => router.push("/worker/tasks")}
                                         className="group relative p-6 bg-[#0077B6] rounded-[2rem] shadow-xl shadow-[#0077B6]/20 transition-all hover:scale-[1.02] active:scale-98 overflow-hidden text-left"
                                     >
                                         <div className="relative z-10 flex flex-col h-full justify-between">
@@ -183,18 +180,13 @@ export default function WorkerDashboard() {
                                             <p className="text-xs text-[#001D29]/60 font-medium">Review completed records</p>
                                         </div>
                                     </div>
-                                    <button className="px-6 py-2 bg-[#001D29] text-[#48CAE4] rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#0077B6] hover:text-white transition-all">
+                                    <button onClick={() => router.push("/worker/history")} className="px-6 py-2 bg-[#001D29] text-[#48CAE4] rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#0077B6] hover:text-white transition-all">
                                         View Archive
                                     </button>
                                 </div>
                             </motion.section>
                         </div>
                     </div>
-
-                    {/* Full-Width Task Management Section */}
-                    <motion.div variants={itemVariants} id="tasks-section" className="w-full">
-                        <TaskList />
-                    </motion.div>
 
                     {/* System Health Decor */}
                     <motion.div variants={itemVariants} className="flex justify-center gap-2 opacity-40 py-4">

@@ -143,7 +143,10 @@ export default function OwnerDashboard() {
                             
                             <div className="grid md:grid-cols-2 gap-6">
                                 {/* Primary Action: Styled with palette electric blue */}
-                                <button className="group relative p-8 bg-[#0077B6] rounded-[2.5rem] shadow-xl shadow-[#0077B6]/20 transition-all hover:scale-[1.02] active:scale-98 overflow-hidden text-left">
+                                <button
+  onClick={() => router.push("/owner/requests")}
+  className="group relative p-8 bg-[#0077B6] rounded-[2.5rem] shadow-xl shadow-[#0077B6]/20 transition-all hover:scale-[1.02] active:scale-98 overflow-hidden text-left"
+>
                                     <div className="relative z-10 flex flex-col h-full justify-between">
                                         <Compass className="w-10 h-10 text-[#48CAE4] mb-8 transition-transform group-hover:rotate-12" />
                                         <div>
@@ -155,7 +158,10 @@ export default function OwnerDashboard() {
                                 </button>
 
                                 {/* Manage Workers */}
-                                <button className="group relative p-8 bg-white border border-[#001D29]/5 rounded-[2.5rem] shadow-lg shadow-[#001D29]/05 transition-all hover:shadow-xl hover:scale-[1.02] active:scale-98 text-left">
+                                <button
+  onClick={() => router.push("/owner/workers")}
+  className="group relative p-8 bg-white border border-[#001D29]/5 rounded-[2.5rem] shadow-lg shadow-[#001D29]/05 transition-all hover:shadow-xl hover:scale-[1.02] active:scale-98 text-left"
+>
                                     <Users className="w-10 h-10 text-[#0077B6] mb-8 group-hover:scale-110 transition-transform" />
                                     <div>
                                         <h4 className="text-2xl font-black text-[#001D29] uppercase leading-none tracking-tighter">Manage <br/> Workers</h4>
@@ -166,16 +172,39 @@ export default function OwnerDashboard() {
                                 {/* Other Controls (Mini Grid) */}
                                 <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
                                     {[
-                                        { title: "Inventory", icon: Database, desc: "Track Stock" },
-                                        { title: "AI Rules", icon: Settings, desc: "Decision Engine" },
-                                        { title: "Audit Trail", icon: FileSearch, desc: "Verify Logs" }
-                                    ].map((item, i) => (
-                                        <button key={i} className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm border border-[#001D29]/5 rounded-[2rem] hover:bg-white transition-all group">
-                                            <item.icon className="w-6 h-6 text-[#0077B6] mb-3 group-hover:rotate-12 transition-transform" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest text-[#001D29]">{item.title}</span>
-                                            <span className="text-[8px] font-bold text-[#0077B6]/60 uppercase mt-1">{item.desc}</span>
-                                        </button>
-                                    ))}
+  {
+    title: "Inventory",
+    icon: Database,
+    desc: "Track Stock",
+    onClick: () => router.push("/owner/inventory"),
+  },
+  {
+    title: "AI Rules",
+    icon: Settings,
+    desc: "Decision Engine",
+    onClick: () => router.push("/owner/rules"),
+  },
+  {
+    title: "Audit Trail",
+    icon: FileSearch,
+    desc: "Verify Logs",
+    onClick: () => router.push("/owner/audit"),
+  },
+].map((item, i) => (
+  <button
+    key={i}
+    onClick={item.onClick}
+    className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm border border-[#001D29]/5 rounded-[2rem] hover:bg-white transition-all group"
+  >
+    <item.icon className="w-6 h-6 text-[#0077B6] mb-3 group-hover:rotate-12 transition-transform" />
+    <span className="text-[10px] font-black uppercase tracking-widest text-[#001D29]">
+      {item.title}
+    </span>
+    <span className="text-[8px] font-bold text-[#0077B6]/60 uppercase mt-1">
+      {item.desc}
+    </span>
+  </button>
+))}
                                 </div>
                             </div>
                         </motion.section>
