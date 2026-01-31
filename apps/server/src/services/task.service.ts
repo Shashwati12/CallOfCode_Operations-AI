@@ -25,7 +25,6 @@ export class TaskService {
         });
 
         return tasks;
-        return tasks;
     }
 
     /**
@@ -143,6 +142,7 @@ export class TaskService {
     async setAvailability(workerId: string, shifts: any[]): Promise<void> {
         // Feature temporarily disabled
         // TODO: Implement availability tracking
+        // Placeholder until WorkerAvailability model is confirmed/added
         // Placeholder until WorkerAvailability model is confirmed/added
         console.log("Setting worker availability:", { workerId, shifts });
 
