@@ -1,5 +1,5 @@
 // nodes/planTasks.node.ts
-import type { OpsState, PlannedTask, NormalizedPayload } from "../state";
+import type { OpsState, PlannedTask, NormalizedPayload } from "../../prompts/state";
 import { planTasksPrompt } from "../../prompts/planTasks.prompt";
 import { callGemini, extractJSON } from "../../services/gemini.service";
 

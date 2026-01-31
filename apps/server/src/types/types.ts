@@ -186,6 +186,8 @@ export interface AuthenticatedUser {
     id: string;
     role: UserRole;
     name: string;
+    email: string;
+    phone?: string;
 }
 
 declare global {

@@ -1,5 +1,5 @@
 // nodes/decide.node.ts
-import type { OpsState, AgentDecision, NormalizedPayload } from "../state";
+import type { OpsState, AgentDecision, NormalizedPayload } from "../../prompts/state";
 import { decidePrompt } from "../../prompts/decide.prompt";
 import { callGemini, extractJSON } from "../../services/gemini.service";
 

@@ -1,5 +1,5 @@
 // nodes/respond.node.ts
-import type { OpsState, NormalizedPayload } from "../state";
+import type { OpsState, NormalizedPayload } from "../../prompts/state";
 import { respondPrompt } from "../../prompts/respond.prompt";
 import { callGemini } from "../../services/gemini.service";
 

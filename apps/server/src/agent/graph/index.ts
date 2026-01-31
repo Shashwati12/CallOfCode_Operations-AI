@@ -1,6 +1,6 @@
 // graph/index.ts
 import { StateGraph, END, START, Annotation } from "@langchain/langgraph";
-import type { OpsState, InventoryCheck, StaffLoad, AgentDecision, PlannedTask } from "./state";
+import type { OpsState, InventoryCheck, StaffLoad, AgentDecision, PlannedTask } from "../prompts/state";
 import { observeNode } from "./nodes/observe.node";
 import { orientNode } from "./nodes/orient.node";
 import { decideNode } from "./nodes/decide.node";

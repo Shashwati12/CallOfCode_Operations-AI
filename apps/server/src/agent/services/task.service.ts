@@ -1,6 +1,6 @@
 // services/task.service.ts
 import prisma from "@Hackron/db";
-import type { PlannedTask } from "../graph/state";
+import type { PlannedTask } from "../prompts/state";
 
 /**
  * Create tasks in the database from planned tasks
@@ -20,7 +20,7 @@ export async function createTasksFromPlan(
                 requiredSkills: task.requiredSkills,
                 estimatedMin: task.estimatedMin,
                 status: task.suggestedWorkerId ? "ASSIGNED" : "PENDING",
-                assignedToId: task.suggestedWorkerId,
+                workerId: task.suggestedWorkerId,
             },
         });
         taskIds.push(created.id);
@@ -79,7 +79,7 @@ export async function assignTask(
     await prisma.task.update({
         where: { id: taskId },
         data: {
-            assignedToId: workerId,
+            workerId: workerId,
             status: "ASSIGNED",
         },
     });
@@ -94,7 +94,7 @@ export async function getWorkerLoad(workerId: string): Promise<{
 }> {
     const tasks = await prisma.task.findMany({
         where: {
-            assignedToId: workerId,
+            workerId: workerId,
             status: { in: ["PENDING", "ASSIGNED", "IN_PROGRESS"] },
         },
     });

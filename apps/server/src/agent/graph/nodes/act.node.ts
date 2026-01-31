@@ -1,5 +1,5 @@
 import prisma from "@Hackron/db";
-import type { OpsState } from "../state";
+import type { OpsState } from "../../prompts/state";
 
 /**
  * Act Node (Execution Agent)
@@ -91,7 +91,7 @@ async function handleAcceptAndPlan(state: OpsState): Promise<void> {
         requiredSkills: task.requiredSkills,
         estimatedMin: task.estimatedMin,
         status: task.suggestedWorkerId ? "ASSIGNED" : "PENDING",
-        assignedToId: task.suggestedWorkerId,
+        workerId: task.suggestedWorkerId,
       },
     });
   }
