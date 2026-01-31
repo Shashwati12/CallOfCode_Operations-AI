@@ -190,6 +190,36 @@ async function seedRequests() {
                 estimated_minutes: 180,
                 notes: "Bulk kurta order for wedding"
             }
+        },
+        {
+            // FAILURE CASE: Stockout
+            id: "req-004",
+            customerId: "cust-004", // Assuming cust-004 exists or will be created? Wait, seedCustomers creates 5.
+            source: "store",
+            status: "NEW",
+            priority: 9,
+            payload: {
+                type: "order",
+                items: [{ sku: "SA-001", qty: 20, description: "Silk Saree" }], // Available: 10
+                required_skills: ["packaging"],
+                estimated_minutes: 30,
+                notes: "Urgent: Stock required immediately. Customer at counter."
+            }
+        },
+        {
+            // FAILURE CASE: Ambiguous / Complex (Likely Delay or Escalate)
+            id: "req-005",
+            customerId: "cust-005",
+            source: "whatsapp",
+            status: "NEW",
+            priority: 4,
+            payload: {
+                type: "alteration",
+                items: [], // Missing items info
+                required_skills: [],
+                estimated_minutes: 0,
+                notes: "Customer sent photo but didn't specify alteration type. Fabric looks delicate. Delivery might be delayed if sourcing needed."
+            }
         }
     ];
 

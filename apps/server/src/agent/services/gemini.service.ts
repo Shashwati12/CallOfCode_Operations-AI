@@ -15,6 +15,9 @@ export async function callGemini(prompt: string): Promise<string> {
   try {
     const result = await model.generateContent(prompt);
     const text = result.response.text();
+    console.log("\n⬇️ [GEMINI RESPONSE] ⬇️");
+    console.log(text);
+    console.log("⬆️ [END GEMINI RESPONSE] ⬆️\n");
     return text;
   } catch (error) {
     console.error("[GEMINI] API Error:", error);

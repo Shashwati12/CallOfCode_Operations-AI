@@ -1,6 +1,6 @@
 // nodes/orient.node.ts
 import prisma from "@Hackron/db";
-import type { OpsState, StaffLoad, InventoryCheck, NormalizedPayload } from "../state";
+import type { OpsState, StaffLoad, InventoryCheck, NormalizedPayload } from "../../prompts/state";
 
 /**
  * Orient Node (Context Builder)
@@ -32,13 +32,18 @@ export async function orientNode(state: OpsState): Promise<Partial<OpsState>> {
         status: { in: ["PENDING", "ASSIGNED", "IN_PROGRESS"] }
       },
       include: {
-        assignedTo: true,
+        worker: true,
       },
     });
 
     // Calculate staff workload
     const staffLoad: StaffLoad[] = staff.map(worker => {
-      const workerTasks = activeTasks.filter(t => t.assignedToId === worker.id);
+      // Worker model has userId linking to User, and Task model has workerId linking to Worker's userId
+      // Wait, in schema: workerId String? (references Worker.userId)
+      // And Worker.userId references User.id
+      // In orient node, 'staff' is User[].
+      // So to match, we need to check if task.workerId === worker.id
+      const workerTasks = activeTasks.filter(t => t.workerId === worker.id);
       const estimatedMinutesRemaining = workerTasks.reduce((sum, t) => sum + (t.estimatedMin || 0), 0);
 
       return {

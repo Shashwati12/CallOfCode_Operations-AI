@@ -1,6 +1,6 @@
 // nodes/observe.node.ts
 import prisma from "@Hackron/db";
-import type { OpsState, NormalizedPayload } from "../state";
+import type { OpsState, NormalizedPayload } from "../../prompts/state";
 import { callGemini } from "../../services/gemini.service";
 import { normalizePrompt } from "../../prompts/normalize.prompt";
 

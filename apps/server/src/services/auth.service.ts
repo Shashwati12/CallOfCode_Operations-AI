@@ -394,58 +394,56 @@ export class AuthService {
         _oldPassword: string,
         _newPassword: string,
     ): Promise<void> {
-        console.log("Changing password for user:", userId);
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+        });
 
-        // TODO: Integrate with Prisma
-        // const user = await prisma.user.findUnique({
-        //   where: { id: userId },
-        // });
-        //
-        // if (!user) {
-        //   throw new AppError(404, "User not found");
-        // }
-        //
-        // const isPasswordValid = await this.comparePassword(
-        //   _oldPassword,
-        //   user.passwordHash,
-        // );
-        //
-        // if (!isPasswordValid) {
-        //   throw new AppError(401, "Invalid current password");
-        // }
-        //
-        // const newPasswordHash = await this.hashPassword(_newPassword);
-        //
-        // await prisma.user.update({
-        //   where: { id: userId },
-        //   data: { passwordHash: newPasswordHash },
-        // });
+        if (!user) {
+            throw new AppError(404, "User not found");
+        }
+
+        const isPasswordValid = await this.comparePassword(
+            _oldPassword,
+            user.passwordHash,
+        );
+
+        if (!isPasswordValid) {
+            throw new AppError(401, "Invalid current password");
+        }
+
+        const newPasswordHash = await this.hashPassword(_newPassword);
+
+        await prisma.user.update({
+            where: { id: userId },
+            data: { passwordHash: newPasswordHash },
+        });
     }
 
     /**
      * Get user profile by ID
      */
     async getUserById(userId: string): Promise<AuthenticatedUser | null> {
-        console.log("Fetching user:", userId);
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                phone: true,
+                role: true,
+                isActive: true, // Need to cast or map to AuthenticatedUser
+            },
+        });
 
-        // TODO: Integrate with Prisma
-        // const user = await prisma.user.findUnique({
-        //   where: { id: userId },
-        //   select: {
-        //     id: true,
-        //     name: true,
-        //     phone: true,
-        //     role: true,
-        //   },
-        // });
-        //
-        // return user;
+        if (!user) return null;
 
-        // Keep methods in scope for future use
-        void this.comparePassword;
-        void this.hashPassword;
-
-        return null;
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone || undefined,
+            role: user.role as UserRole,
+        };
     }
 }
 
