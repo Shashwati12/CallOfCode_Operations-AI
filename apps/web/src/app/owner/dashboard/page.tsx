@@ -207,36 +207,6 @@ export default function OwnerDashboard() {
                                 {/* Other Controls (Mini Grid) */}
                                 <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {[
-<<<<<<< Updated upstream
-  {
-    title: "Inventory",
-    icon: Database,
-    desc: "Track Stock",
-    onClick: () => router.push("/owner/inventory"),
-  },
-  
-  {
-    title: "Audit Trail",
-    icon: FileSearch,
-    desc: "Verify Logs",
-    onClick: () => router.push("/owner/audit"),
-  },
-].map((item, i) => (
-  <button
-    key={i}
-    onClick={item.onClick}
-    className="flex flex-col items-center justify-center p-6 bg-white/60 backdrop-blur-sm border border-[#001D29]/5 rounded-[2rem] hover:bg-white transition-all group"
-  >
-    <item.icon className="w-6 h-6 text-[#0077B6] mb-3 group-hover:rotate-12 transition-transform" />
-    <span className="text-[10px] font-black uppercase tracking-widest text-[#001D29]">
-      {item.title}
-    </span>
-    <span className="text-[8px] font-bold text-[#0077B6]/60 uppercase mt-1">
-      {item.desc}
-    </span>
-  </button>
-))}
-=======
                                         {
                                             title: "Inventory",
                                             icon: Database,
@@ -270,7 +240,6 @@ export default function OwnerDashboard() {
                                             </span>
                                         </button>
                                     ))}
->>>>>>> Stashed changes
                                 </div>
                             </div>
                         </motion.section>
