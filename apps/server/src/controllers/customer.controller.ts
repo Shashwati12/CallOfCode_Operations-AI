@@ -76,7 +76,6 @@ export class CustomerController {
 
         res.status(200).json(response);
     }
-
     /**
      * GET /api/requests
      * Get all requests for current customer
