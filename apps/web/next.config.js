@@ -2,9 +2,7 @@ require("@Hackron/env/web");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typedRoutes: true,
-  reactCompiler: true,
+  reactStrictMode: true,
 };
 
 module.exports = nextConfig;
-
