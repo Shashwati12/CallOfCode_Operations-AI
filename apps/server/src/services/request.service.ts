@@ -134,6 +134,41 @@ export class RequestService {
     }
 
     /**
+     * Get all requests for a specific customer
+     */
+    async getCustomerRequests(customerId: string): Promise<any[]> {
+        const requests = await prisma.request.findMany({
+            where: { customerId },
+            include: {
+                tasks: {
+                    include: {
+                        worker: true
+                    }
+                }
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+
+        return requests;
+    }
+
+    /**
+     * Helper to get requests for a user (looks up customer)
+     */
+    async getRequestsForUser(userId: string): Promise<any[]> {
+        const customer = await prisma.customer.findUnique({
+            where: { userId }
+        });
+
+        if (!customer) {
+            return [];
+        }
+
+        return this.getCustomerRequests(customer.id);
+    }
+
+
+    /**
      * List requests with filters
      */
     async listRequests(filters: {
